@@ -1,0 +1,13 @@
+*
+!.gitignore
+!app/
+!logs/
+!cache/
+!sessions/
+app/documents/*/*
+app/signatures/*
+app/uploads/*
+app/exports/*
+logs/*.log
+cache/*
+sessions/*
