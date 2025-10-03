@@ -1,78 +1,133 @@
 <?php
-namespace Core;
 
-class Router {
-    protected $routes = [];
-    protected $params = [];
+namespace App\Core;
 
-    public function add($route, $params = []) {
-        $route = preg_replace('/\//', '\\/', $route);
-        $route = preg_replace('/\{([a-z]+)\}/', '(?P<\1>[a-z-]+)', $route);
-        $route = preg_replace('/\{([a-z]+):([^\}]+)\}/', '(?P<\1>\2)', $route);
-        $route = '/^' . $route . '$/i';
-        $this->routes[$route] = $params;
+class Router
+{
+    protected $routes = [
+        'GET' => [],
+        'POST' => [],
+        'PUT' => [],
+        'DELETE' => [],
+    ];
+    
+    protected $groupPrefix = '';
+    protected $groupMiddleware = [];
+    
+    public function get($path, $handler)
+    {
+        $this->addRoute('GET', $path, $handler);
     }
-
-    public function match($url) {
-        foreach ($this->routes as $route => $params) {
-            if (preg_match($route, $url, $matches)) {
-                foreach ($matches as $key => $match) {
-                    if (is_string($key)) {
-                        $params[$key] = $match;
-                    }
+    
+    public function post($path, $handler)
+    {
+        $this->addRoute('POST', $path, $handler);
+    }
+    
+    public function put($path, $handler)
+    {
+        $this->addRoute('PUT', $path, $handler);
+    }
+    
+    public function delete($path, $handler)
+    {
+        $this->addRoute('DELETE', $path, $handler);
+    }
+    
+    protected function addRoute($method, $path, $handler)
+    {
+        $path = $this->groupPrefix . $path;
+        $path = '/' . trim($path, '/');
+        
+        $this->routes[$method][$path] = [
+            'handler' => $handler,
+            'middleware' => $this->groupMiddleware,
+        ];
+    }
+    
+    public function group($attributes, $callback)
+    {
+        $previousPrefix = $this->groupPrefix;
+        $previousMiddleware = $this->groupMiddleware;
+        
+        if (isset($attributes['prefix'])) {
+            $this->groupPrefix = $previousPrefix . '/' . trim($attributes['prefix'], '/');
+        }
+        
+        if (isset($attributes['middleware'])) {
+            $middleware = is_array($attributes['middleware']) 
+                ? $attributes['middleware'] 
+                : explode(',', $attributes['middleware']);
+            $this->groupMiddleware = array_merge($previousMiddleware, $middleware);
+        }
+        
+        $callback($this);
+        
+        $this->groupPrefix = $previousPrefix;
+        $this->groupMiddleware = $previousMiddleware;
+    }
+    
+    public function dispatch(Request $request, Response $response)
+    {
+        $method = $request->getMethod();
+        $uri = $request->getUri();
+        
+        // Check for exact match
+        if (isset($this->routes[$method][$uri])) {
+            $route = $this->routes[$method][$uri];
+            return $this->executeRoute($route, [], $request, $response);
+        }
+        
+        // Check for parameterized routes
+        foreach ($this->routes[$method] as $path => $route) {
+            $pattern = $this->convertToRegex($path);
+            if (preg_match($pattern, $uri, $matches)) {
+                array_shift($matches); // Remove full match
+                return $this->executeRoute($route, $matches, $request, $response);
+            }
+        }
+        
+        throw new Exception\NotFoundException("Route not found: $method $uri");
+    }
+    
+    protected function convertToRegex($path)
+    {
+        $path = preg_replace('/\{([a-zA-Z0-9_]+)\}/', '([a-zA-Z0-9_-]+)', $path);
+        return '#^' . $path . '$#';
+    }
+    
+    protected function executeRoute($route, $params, Request $request, Response $response)
+    {
+        // Execute route middleware
+        foreach ($route['middleware'] as $middlewareName) {
+            $middlewareClass = "App\\Middleware\\" . ucfirst($middlewareName) . "Middleware";
+            if (class_exists($middlewareClass)) {
+                $middleware = new $middlewareClass();
+                if (!$middleware->handle($request)) {
+                    return;
                 }
-                $this->params = $params;
-                return true;
             }
         }
-        return false;
-    }
-
-    public function dispatch($url) {
-        $url = $this->removeQueryStringVariables($url);
-
-        if ($this->match($url)) {
-            $controller = $this->params['controller'];
-            $controller = $this->convertToStudlyCaps($controller);
-            $controller = "Controllers\\$controller";
-
-            if (class_exists($controller)) {
-                $controller_object = new $controller($this->params);
-                $action = $this->params['action'];
-                $action = $this->convertToCamelCase($action);
-                $action .= 'Action';
-
-                if (method_exists($controller_object, $action)) {
-                    $controller_object->$action();
-                } else {
-                    throw new \Exception("Method $action in controller $controller not found");
-                }
-            } else {
-                throw new \Exception("Controller class $controller not found");
+        
+        // Parse handler
+        if (is_string($route['handler'])) {
+            list($controller, $method) = explode('@', $route['handler']);
+            $controllerClass = "App\\Controllers\\$controller";
+            
+            if (!class_exists($controllerClass)) {
+                throw new \Exception("Controller not found: $controllerClass");
             }
-        } else {
-            throw new \Exception('No route matched.', 404);
-        }
-    }
-
-    protected function convertToStudlyCaps($string) {
-        return str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
-    }
-
-    protected function convertToCamelCase($string) {
-        return lcfirst($this->convertToStudlyCaps($string));
-    }
-
-    protected function removeQueryStringVariables($url) {
-        if ($url != '') {
-            $parts = explode('&', $url, 2);
-            if (strpos($parts[0], '=') === false) {
-                $url = $parts[0];
-            } else {
-                $url = '';
+            
+            $controllerInstance = new $controllerClass($request, $response);
+            
+            if (!method_exists($controllerInstance, $method)) {
+                throw new \Exception("Method not found: $method in $controllerClass");
             }
+            
+            return call_user_func_array([$controllerInstance, $method], $params);
         }
-        return $url;
+        
+        // Closure handler
+        return call_user_func_array($route['handler'], $params);
     }
 }
-?>

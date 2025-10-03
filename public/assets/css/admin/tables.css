@@ -1,0 +1,29 @@
+.data-table-container {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.table-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.action-icon {
+    padding: 0.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color var(--transition-base);
+}
+
+.action-icon:hover {
+    color: var(--primary-color);
+}

@@ -1,0 +1,19 @@
+.report-filters {
+    background-color: var(--bg-primary);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.date-range-picker {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.report-preview {
+    background-color: var(--bg-primary);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    min-height: 400px;
+}

@@ -1,0 +1,18 @@
+.franchise-dashboard {
+    padding: var(--spacing-xl);
+}
+
+.performance-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.performance-card {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border-top: 3px solid var(--primary-color);
+}

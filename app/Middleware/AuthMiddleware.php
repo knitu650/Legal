@@ -1,22 +1,27 @@
 <?php
+
 namespace App\Middleware;
 
+use App\Core\Session;
 use App\Core\Request;
-use App\Services\Auth;
 
-class AuthMiddleware {
-    public function handle(Request $request, callable $next) {
-        if (Auth::getInstance()->guest()) {
-            return redirect('/login');
+class AuthMiddleware
+{
+    public function handle(Request $request)
+    {
+        if (!Session::has('user')) {
+            if ($request->isAjax()) {
+                header('Content-Type: application/json');
+                http_response_code(401);
+                echo json_encode(['error' => 'Unauthenticated']);
+                exit;
+            }
+            
+            Session::set('intended_url', $request->getUri());
+            header('Location: /login');
+            exit;
         }
         
-        // Check session timeout (30 minutes)
-        if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
-            Auth::getInstance()->logout();
-            return redirect('/login')->with('error', 'Session expired. Please login again.');
-        }
-        
-        $_SESSION['last_activity'] = time();
-        return $next($request);
+        return true;
     }
 }
