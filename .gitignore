@@ -1,0 +1,15 @@
+/vendor/
+/node_modules/
+/.env
+/storage/logs/*.log
+/storage/cache/*
+/storage/sessions/*
+/public/assets/uploads/*
+/public/downloads/*
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+composer.lock
+package-lock.json

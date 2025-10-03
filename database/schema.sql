@@ -1,0 +1,22 @@
+-- ============================================================================
+-- LEGAL DOCUMENT MANAGEMENT SYSTEM - DATABASE SCHEMA
+-- ============================================================================
+
+-- Run all migrations in order
+-- Execute each migration file in sequence:
+-- 001_create_users_table.php
+-- 002_create_roles_table.php
+-- 003_create_permissions_table.php
+-- 004_create_documents_table.php
+-- 005_create_document_templates_table.php
+-- 006_create_document_categories_table.php
+-- 007_create_subscriptions_table.php
+-- 008_create_transactions_table.php
+-- 009_create_lawyers_table.php
+-- 010_create_franchises_table.php
+-- 011_create_signatures_table.php
+-- 012_create_support_tickets_table.php
+-- 013_create_notifications_table.php
+-- 014_create_audit_logs_table.php
+
+-- Sample data insertion can be done using seed files
