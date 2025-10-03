@@ -1,0 +1,151 @@
+/**
+ * Responsive Styles
+ * Mobile-first responsive design
+ */
+
+/* Mobile First (default styles are mobile) */
+
+/* Tablet: 768px and up */
+@media (min-width: 768px) {
+    .hero-title {
+        font-size: var(--font-size-4xl);
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .documents-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .navbar-menu {
+        display: flex !important;
+    }
+    
+    .mobile-menu-toggle {
+        display: none;
+    }
+}
+
+/* Desktop: 1024px and up */
+@media (min-width: 1024px) {
+    .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .documents-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .templates-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Large Desktop: 1280px and up */
+@media (min-width: 1280px) {
+    .documents-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Mobile: max-width 767px */
+@media (max-width: 767px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .section {
+        padding: 2rem 0;
+    }
+    
+    .navbar {
+        padding: 1rem;
+    }
+    
+    .hero {
+        padding: 3rem 1rem;
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-base);
+    }
+    
+    .section-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .features-grid,
+    .documents-grid,
+    .templates-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-bar {
+        flex-direction: column;
+    }
+    
+    .filter-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .document-list-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .document-list-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Hide on mobile */
+@media (max-width: 767px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Hide on desktop */
+@media (min-width: 768px) {
+    .hide-desktop {
+        display: none !important;
+    }
+}
+
+/* Print styles */
+@media print {
+    .header,
+    .footer,
+    .navbar,
+    .btn,
+    .sidebar {
+        display: none;
+    }
+    
+    body {
+        font-size: 12pt;
+    }
+    
+    a {
+        text-decoration: underline;
+    }
+}

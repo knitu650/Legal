@@ -1,0 +1,36 @@
+.documents-table-wrapper {
+    background-color: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.documents-toolbar {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.document-row {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color var(--transition-base);
+}
+
+.document-row:hover {
+    background-color: var(--bg-secondary);
+}
+
+.document-status {
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+}
+
+.status-draft { background-color: var(--warning-bg); color: var(--warning-color); }
+.status-completed { background-color: var(--success-bg); color: var(--success-color); }
+.status-signed { background-color: var(--info-bg); color: var(--info-color); }
