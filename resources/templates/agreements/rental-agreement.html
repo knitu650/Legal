@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rental Agreement</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            text-decoration: underline;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .clause {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .signature-block {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature {
+            width: 45%;
+        }
+        .signature-line {
+            border-top: 1px solid #333;
+            margin-top: 60px;
+            padding-top: 5px;
+        }
+        .placeholder {
+            background-color: #ffffcc;
+            padding: 2px 5px;
+            border-bottom: 1px dotted #333;
+        }
+        @media print {
+            .placeholder {
+                background-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>RENTAL AGREEMENT</h1>
+    
+    <div class="section">
+        <p class="clause">
+            This Rental Agreement ("Agreement") is entered into on 
+            <span class="placeholder">{{agreement_date}}</span> 
+            at <span class="placeholder">{{place}}</span>
+        </p>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">BETWEEN:</div>
+        <p class="clause">
+            <strong>Landlord:</strong> <span class="placeholder">{{landlord_name}}</span>, 
+            son/daughter/wife of <span class="placeholder">{{landlord_relation}}</span>, 
+            residing at <span class="placeholder">{{landlord_address}}</span>
+            (hereinafter referred to as the "Landlord" which expression shall include his/her heirs, 
+            executors, administrators and assigns) of the FIRST PART;
+        </p>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">AND:</div>
+        <p class="clause">
+            <strong>Tenant:</strong> <span class="placeholder">{{tenant_name}}</span>, 
+            son/daughter/wife of <span class="placeholder">{{tenant_relation}}</span>, 
+            residing at <span class="placeholder">{{tenant_address}}</span>
+            (hereinafter referred to as the "Tenant" which expression shall include his/her heirs, 
+            executors, administrators and assigns) of the SECOND PART.
+        </p>
+    </div>
+    
+    <div class="section">
+        <div class="section-title">WITNESSETH:</div>
+        
+        <div class="clause">
+            <strong>1. PROPERTY DESCRIPTION:</strong><br>
+            The Landlord hereby agrees to let out and the Tenant agrees to take on rent the premises 
+            situated at <span class="placeholder">{{property_address}}</span>, 
+            comprising of <span class="placeholder">{{property_details}}</span>
+            (hereinafter referred to as the "Premises").
+        </div>
+        
+        <div class="clause">
+            <strong>2. TERM:</strong><br>
+            The tenancy shall be for a period of <span class="placeholder">{{duration}}</span> months 
+            commencing from <span class="placeholder">{{start_date}}</span> 
+            and ending on <span class="placeholder">{{end_date}}</span>.
+        </div>
+        
+        <div class="clause">
+            <strong>3. RENT:</strong><br>
+            The monthly rent for the Premises shall be Rs. <span class="placeholder">{{monthly_rent}}</span> 
+            (Rupees <span class="placeholder">{{monthly_rent_words}}</span> only), 
+            payable on or before the <span class="placeholder">{{payment_date}}</span> day of each month.
+        </div>
+        
+        <div class="clause">
+            <strong>4. SECURITY DEPOSIT:</strong><br>
+            The Tenant has paid a security deposit of Rs. <span class="placeholder">{{security_deposit}}</span> 
+            (Rupees <span class="placeholder">{{security_deposit_words}}</span> only) 
+            to the Landlord, which shall be refunded at the time of vacating the Premises, 
+            subject to deductions for any damages or unpaid rent.
+        </div>
+        
+        <div class="clause">
+            <strong>5. MAINTENANCE:</strong><br>
+            The Tenant shall maintain the Premises in good condition and shall be responsible 
+            for any damages caused by the Tenant or their guests. Normal wear and tear excepted.
+        </div>
+        
+        <div class="clause">
+            <strong>6. UTILITIES:</strong><br>
+            The Tenant shall be responsible for payment of electricity, water, gas, and other utility bills.
+        </div>
+        
+        <div class="clause">
+            <strong>7. TERMINATION:</strong><br>
+            Either party may terminate this Agreement by giving <span class="placeholder">{{notice_period}}</span> 
+            days written notice to the other party.
+        </div>
+        
+        <div class="clause">
+            <strong>8. USE OF PREMISES:</strong><br>
+            The Premises shall be used only for residential purposes. 
+            No commercial activity shall be carried out without prior written consent of the Landlord.
+        </div>
+        
+        <div class="clause">
+            <strong>9. SUBLETTING:</strong><br>
+            The Tenant shall not sublet or assign the Premises or any part thereof without 
+            the prior written consent of the Landlord.
+        </div>
+        
+        <div class="clause">
+            <strong>10. GOVERNING LAW:</strong><br>
+            This Agreement shall be governed by and construed in accordance with the laws of India. 
+            Any disputes arising out of this Agreement shall be subject to the jurisdiction of 
+            <span class="placeholder">{{jurisdiction}}</span> courts.
+        </div>
+    </div>
+    
+    <div class="section">
+        <p class="clause">
+            IN WITNESS WHEREOF, the parties hereto have executed this Agreement on the date and place 
+            first mentioned above in the presence of the following witnesses:
+        </p>
+    </div>
+    
+    <div class="signature-block">
+        <div class="signature">
+            <div class="signature-line">
+                <strong>LANDLORD</strong><br>
+                <span class="placeholder">{{landlord_name}}</span>
+            </div>
+        </div>
+        
+        <div class="signature">
+            <div class="signature-line">
+                <strong>TENANT</strong><br>
+                <span class="placeholder">{{tenant_name}}</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section" style="margin-top: 40px;">
+        <div class="section-title">WITNESSES:</div>
+        <div class="signature-block">
+            <div class="signature">
+                <div class="signature-line">
+                    <strong>WITNESS 1</strong><br>
+                    Name: _______________________<br>
+                    Address: ____________________
+                </div>
+            </div>
+            
+            <div class="signature">
+                <div class="signature-line">
+                    <strong>WITNESS 2</strong><br>
+                    Name: _______________________<br>
+                    Address: ____________________
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
