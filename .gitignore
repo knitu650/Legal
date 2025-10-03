@@ -13,3 +13,4 @@ Thumbs.db
 *~
 composer.lock
 package-lock.json
+.env
