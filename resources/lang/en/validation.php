@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'required' => 'The :field field is required.',
+    'email' => 'Please enter a valid email address.',
+    'min' => 'The :field must be at least :min characters.',
+    'max' => 'The :field must not exceed :max characters.',
+    'numeric' => 'The :field must be a number.',
+    'unique' => 'The :field has already been taken.',
+    'confirmed' => 'The :field confirmation does not match.',
+    'alpha' => 'The :field may only contain letters.',
+    'alpha_num' => 'The :field may only contain letters and numbers.',
+    'url' => 'Please enter a valid URL.',
+    'date' => 'Please enter a valid date.',
+    'phone' => 'Please enter a valid phone number.',
+    'file' => 'Please select a file.',
+    'image' => 'The file must be an image.',
+    'mimes' => 'The file must be of type: :types.',
+    'max_file_size' => 'The file size must not exceed :size MB.',
+    'in' => 'The selected :field is invalid.',
+    'not_in' => 'The selected :field is invalid.',
+    'regex' => 'The :field format is invalid.',
+    'between' => 'The :field must be between :min and :max.',
+    'accepted' => 'The :field must be accepted.',
+    'same' => 'The :field and :other must match.',
+    'different' => 'The :field and :other must be different.',
+];

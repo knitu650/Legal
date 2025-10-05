@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'success' => 'Operation completed successfully!',
+    'error' => 'An error occurred. Please try again.',
+    'created' => ':item created successfully!',
+    'updated' => ':item updated successfully!',
+    'deleted' => ':item deleted successfully!',
+    'not_found' => ':item not found.',
+    'unauthorized' => 'You are not authorized to perform this action.',
+    'forbidden' => 'Access forbidden.',
+    'server_error' => 'Internal server error. Please contact support.',
+    'confirm_delete' => 'Are you sure you want to delete this :item?',
+    'confirm_action' => 'Are you sure you want to proceed?',
+    'payment_success' => 'Payment completed successfully!',
+    'payment_failed' => 'Payment failed. Please try again.',
+    'subscription_activated' => 'Your subscription has been activated!',
+    'subscription_cancelled' => 'Your subscription has been cancelled.',
+    'email_sent' => 'Email sent successfully!',
+    'email_failed' => 'Failed to send email.',
+    'upload_success' => 'File uploaded successfully!',
+    'upload_failed' => 'File upload failed.',
+    'invalid_request' => 'Invalid request.',
+    'session_expired' => 'Your session has expired. Please login again.',
+    'maintenance_mode' => 'The system is currently under maintenance. Please try again later.',
+    'rate_limit_exceeded' => 'Too many requests. Please try again later.',
+];
